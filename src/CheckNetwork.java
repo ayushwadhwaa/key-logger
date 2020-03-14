@@ -9,21 +9,23 @@ public class CheckNetwork implements Runnable {
     public void run(){
         URL url;
         URLConnection connection = null;
+        Thread t4 = null;
+        SendLogs sl = null;
         while(true){
             try{
                 url = new URL("http://www.google.com");
                 connection  = url.openConnection();
                 connection.connect();
-                SendLogs sl = new SendLogs(re);
-                Thread t4 = new Thread(sl);
-                sl.start();
-            }
-            catch(Exception e){
+                System.out.println("Connected");
+                sl = new SendLogs(re);
+                t4 = new Thread(sl);
+                t4.start();
+            } catch(Exception e){
             }
             try{
                 Thread.currentThread().sleep(500);
-            }
-           catch(Exception e){
+            }catch(Exception e){
+               System.out.println(e);
            }
         }
     }

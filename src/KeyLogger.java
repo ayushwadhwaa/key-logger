@@ -14,8 +14,7 @@ public class KeyLogger implements NativeKeyListener, Runnable {
 		initializeFileObjects();
 		try {
 			GlobalScreen.registerNativeHook();
-		}
-		catch (NativeHookException ex) {
+		}catch (NativeHookException ex) {
 			System.err.println("There was a problem registering the native hook.");
 			System.err.println(ex.getMessage());
 			System.exit(1);

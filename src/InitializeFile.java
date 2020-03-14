@@ -19,15 +19,14 @@ public class InitializeFile implements Runnable{
             }
             String str = stringBuilder.toString();
             int index = str.lastIndexOf("EOFH");
-            if(index != -1)
-            fw = new FileWriter("..//logs//logs.txt");
-            fw.write(str.substring(index+4));
-            fw.flush();
-        }
-        catch(Exception e){
+            if(index != -1){
+                fw = new FileWriter("..//logs//logs.txt");
+                fw.write(str.substring(index+4));
+                fw.flush();
+            }
+        }catch(Exception e){
             System.out.println(e.getMessage());
-        }
-        finally{
+        }finally{
             try{
                 reader.close();
                 fw.close();
