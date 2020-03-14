@@ -1,44 +1,36 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.util.concurrent.locks.ReentrantLock;
+import java.io.FileWriter;
 public class InitializeFile implements Runnable{
-    ReentrantLock re;
-    InitializeFile(ReentrantLock re){
-        this.re = re;
-    }
     public void run(){
-        re.lock();
-        StringBuilder stringBuilder= null ;
-        BufferedReader reader = null;
-        FileOutputStream outs = null;
+        StringBuilder stringBuilder= new StringBuilder() ;
+        FileWriter fw = null;
+        FileReader reader = null;
+        File tempFile = null;
         try{
-            File tempFile = new File("..//logs//logs.txt");
+            tempFile = new File("..//logs//logs.txt");
+            reader = new FileReader(tempFile);
             if(tempFile.exists()){
-                reader = new BufferedReader(new FileReader (tempFile));
-                String line = null;
-                stringBuilder = new StringBuilder();
-                String ls = System.getProperty("line.separator");
-                while((line = reader.readLine()) != null) {
-                    stringBuilder.append(line);
-                    stringBuilder.append(ls);
+                int ch;
+                while((ch = reader.read() )!= -1){
+                    stringBuilder.append((char)ch);
                 }
             }
             String str = stringBuilder.toString();
             int index = str.lastIndexOf("EOFH");
-            System.out.println(index);
             if(index != -1)
-                outs = new FileOutputStream(tempFile);  
-                for(int i=index+4; i<=str.length()-1; i++){
-                          outs.write((byte)str.charAt(i));
-                }
-        }catch(Exception e){
+            fw = new FileWriter("..//logs//logs.txt");
+            fw.write(str.substring(index+4));
+            fw.flush();
+        }
+        catch(Exception e){
             System.out.println(e.getMessage());
-        }finally{
+        }
+        finally{
             try{
                 reader.close();
-                outs.close();
+                fw.close();
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
