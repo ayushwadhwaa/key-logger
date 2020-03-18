@@ -256,9 +256,12 @@ public class DetailsForm extends javax.swing.JFrame {
         String recipientId = recipientTF.getText();
         String time = timeTF.getText();
         obj = new CreateConfigFile(email,pswd,recipientId,time);
-        
+        mainThread = new Main();
+        Thread main  = new Thread(mainThread);
+        main.start();
     }//GEN-LAST:event_submitButtonActionPerformed
     private CreateConfigFile obj;
+    private Main mainThread;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel RightPanel;
     private javax.swing.JLabel dataGif;

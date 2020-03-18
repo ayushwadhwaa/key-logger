@@ -27,7 +27,7 @@ public class CreateConfigFile {
     }
     private void createFile(){
         try{
-             str.append("{\"email:\"");
+            str.append("{\"email:\"");
             str.append(email);
             str.append("\"password:\"");
             str.append(pswd);
@@ -43,7 +43,5 @@ public class CreateConfigFile {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-       
     }
-    
 }
