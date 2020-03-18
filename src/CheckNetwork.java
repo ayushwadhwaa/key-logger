@@ -16,7 +16,6 @@ public class CheckNetwork implements Runnable {
                 url = new URL("http://www.google.com");
                 connection  = url.openConnection();
                 connection.connect();
-                System.out.println("Connected");
                 sl = new SendLogs(re);
                 t4 = new Thread(sl);
                 t4.start();
