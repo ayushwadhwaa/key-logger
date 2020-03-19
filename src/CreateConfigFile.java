@@ -27,7 +27,7 @@ public class CreateConfigFile {
     }
     private void createFile(){
         try{
-            str.append("{\"email:\"");
+            str.append("{email:\"");
             str.append(email);
             str.append("\"password:\"");
             str.append(pswd);

@@ -126,18 +126,9 @@ public class DetailsForm extends javax.swing.JFrame {
         emailTF.setToolTipText("");
 
         pswdTF.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
-        pswdTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pswdTFActionPerformed(evt);
-            }
-        });
-
+      
         recipientTF.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
-        recipientTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recipientTFActionPerformed(evt);
-            }
-        });
+     
 
         jPanel1.setBackground(new java.awt.Color(137, 182, 165));
 
@@ -241,16 +232,9 @@ public class DetailsForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pswdTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswdTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pswdTFActionPerformed
-
-    private void recipientTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recipientTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_recipientTFActionPerformed
-
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
+        this.dispose();
         String email = emailTF.getText();
         String pswd = pswdTF.getText();
         String recipientId = recipientTF.getText();
