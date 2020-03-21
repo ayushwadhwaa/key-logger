@@ -8,6 +8,7 @@
  *
  * @author Ayush Wadhwa
  */
+
 public class DetailsForm extends javax.swing.JFrame {
 
     /**
